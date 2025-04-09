@@ -10,11 +10,18 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
+model Todo {
+    id String @id @default(uuid())
+    title String
+    content String?
+    status Status
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
 
-    @@index([name])
+
+
+enum Status {
+    COMPLETED
+    UNCOMPLETED
 }
