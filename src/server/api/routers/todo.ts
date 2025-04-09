@@ -60,4 +60,17 @@ export const todoRoutes = createTRPCRouter({
         },
       });
     }),
+
+  handleComplete: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      await db.todo.update({
+        data: {
+          status: "COMPLETED",
+        },
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });
